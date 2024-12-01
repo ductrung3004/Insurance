@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>DatabaseConnectManage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DatabaseConnectManage.java</font>
+</center></td></tr></table>
+<pre><span class="s0">public class </span><span class="s1">DatabaseConnectManage</span><span class="s2">{</span>
+    <span class="s3">// Database connection parameters</span>
+    <span class="s0">private </span><span class="s1">String url </span><span class="s2">= </span><span class="s4">&quot;jdbc:sqlserver://swa11op.ddns.net:1433;databaseName=VariedInsurance;encrypt=true;trustServerCertificate=true;&quot;</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String username </span><span class="s2">= </span><span class="s4">&quot;SA&quot;</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">String password </span><span class="s2">= </span><span class="s4">&quot;Thinh@1607&quot;</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">String getUrl</span><span class="s2">(){</span>
+        <span class="s0">return </span><span class="s1">url</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">String getUsername</span><span class="s2">(){</span>
+        <span class="s0">return </span><span class="s1">username</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public </span><span class="s1">String getPassword</span><span class="s2">(){</span>
+        <span class="s0">return </span><span class="s1">password</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">setUrl</span><span class="s2">(</span><span class="s1">String url</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">url </span><span class="s2">= </span><span class="s1">url</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">setUsername</span><span class="s2">(</span><span class="s1">String username</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">username </span><span class="s2">= </span><span class="s1">username</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">setPassword</span><span class="s2">(</span><span class="s1">String password</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">password </span><span class="s2">= </span><span class="s1">password</span><span class="s2">;</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

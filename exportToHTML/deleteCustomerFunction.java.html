@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>deleteCustomerFunction.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #6aab73;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+deleteCustomerFunction.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.</span><span class="s1">table</span><span class="s2">.</span><span class="s1">DefaultTableModel</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">deleteCustomerFunction </span><span class="s2">{</span>
+
+
+    <span class="s0">void </span><span class="s1">deleteCustomer</span><span class="s2">(</span><span class="s1">JTable table</span><span class="s2">, </span><span class="s1">DefaultTableModel model</span><span class="s2">) {</span>
+        <span class="s1">DatabaseConnectManage connectManage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">DatabaseConnectManage</span><span class="s2">();</span>
+        <span class="s0">int </span><span class="s1">selectedRow </span><span class="s2">= </span><span class="s1">table</span><span class="s2">.</span><span class="s1">getSelectedRow</span><span class="s2">();</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedRow </span><span class="s2">== -</span><span class="s3">1</span><span class="s2">) {</span>
+            <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">table</span><span class="s2">, </span><span class="s4">&quot;Please select a customer to delete&quot;</span><span class="s2">);</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s0">int </span><span class="s1">customerID </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">) </span><span class="s1">model</span><span class="s2">.</span><span class="s1">getValueAt</span><span class="s2">(</span><span class="s1">selectedRow</span><span class="s2">, </span><span class="s3">0</span><span class="s2">);</span>
+
+        <span class="s0">int </span><span class="s1">confirm </span><span class="s2">= </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showConfirmDialog</span><span class="s2">(</span><span class="s1">table</span><span class="s2">,</span>
+                <span class="s4">&quot;Are you sure you want to delete this customer?&quot;</span><span class="s2">,</span>
+                <span class="s4">&quot;Confirm Deletion&quot;</span><span class="s2">,</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">YES_NO_OPTION</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">confirm </span><span class="s2">== </span><span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">YES_OPTION</span><span class="s2">) {</span>
+            <span class="s0">try </span><span class="s2">(</span><span class="s1">Connection conn </span><span class="s2">= </span><span class="s1">DriverManager</span><span class="s2">.</span><span class="s1">getConnection</span><span class="s2">(</span><span class="s1">connectManage</span><span class="s2">.</span><span class="s1">getUrl</span><span class="s2">(), </span><span class="s1">connectManage</span><span class="s2">.</span><span class="s1">getUsername</span><span class="s2">(), </span><span class="s1">connectManage</span><span class="s2">.</span><span class="s1">getPassword</span><span class="s2">())) {</span>
+                <span class="s5">// Delete related records first to avoid foreign key constraints</span>
+                <span class="s0">try </span><span class="s2">(</span><span class="s1">PreparedStatement pstmtClaims </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">prepareStatement</span><span class="s2">(</span><span class="s4">&quot;DELETE FROM Claim WHERE CustomerID = ?&quot;</span><span class="s2">);</span>
+                     <span class="s1">PreparedStatement pstmtPolicy </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">prepareStatement</span><span class="s2">(</span><span class="s4">&quot;DELETE FROM Policy WHERE CustomerID = ?&quot;</span><span class="s2">);</span>
+                     <span class="s1">PreparedStatement pstmtCustomer </span><span class="s2">= </span><span class="s1">conn</span><span class="s2">.</span><span class="s1">prepareStatement</span><span class="s2">(</span><span class="s4">&quot;DELETE FROM Customer WHERE CustomerID = ?&quot;</span><span class="s2">)) {</span>
+
+                    <span class="s5">// Delete claims</span>
+                    <span class="s1">pstmtClaims</span><span class="s2">.</span><span class="s1">setInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">, </span><span class="s1">customerID</span><span class="s2">);</span>
+                    <span class="s1">pstmtClaims</span><span class="s2">.</span><span class="s1">executeUpdate</span><span class="s2">();</span>
+
+                    <span class="s5">// Delete policies</span>
+                    <span class="s1">pstmtPolicy</span><span class="s2">.</span><span class="s1">setInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">, </span><span class="s1">customerID</span><span class="s2">);</span>
+                    <span class="s1">pstmtPolicy</span><span class="s2">.</span><span class="s1">executeUpdate</span><span class="s2">();</span>
+
+                    <span class="s5">// Delete customer</span>
+                    <span class="s1">pstmtCustomer</span><span class="s2">.</span><span class="s1">setInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">, </span><span class="s1">customerID</span><span class="s2">);</span>
+                    <span class="s1">pstmtCustomer</span><span class="s2">.</span><span class="s1">executeUpdate</span><span class="s2">();</span>
+
+                    <span class="s1">CustomerTab customerTab </span><span class="s2">= </span><span class="s0">new </span><span class="s1">CustomerTab</span><span class="s2">();</span>
+                    <span class="s1">customerTab</span><span class="s2">.</span><span class="s1">loadCustomersToTable</span><span class="s2">(</span><span class="s1">model</span><span class="s2">);</span>
+
+
+                    <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">table</span><span class="s2">, </span><span class="s4">&quot;Customer Deleted Successfully&quot;</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException e</span><span class="s2">) {</span>
+                <span class="s1">JOptionPane</span><span class="s2">.</span><span class="s1">showMessageDialog</span><span class="s2">(</span><span class="s1">table</span><span class="s2">, </span><span class="s4">&quot;Error deleting customer: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>
