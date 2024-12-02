@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.*;
 
 
@@ -9,7 +7,7 @@ public class SearchTab {
     private JPanel mainPanel;
 
     private JTextArea txtResult;
-    DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    Account connectManage;
     private JRadioButton customerRadioButton;
     private JRadioButton agentRadioButton;
     private JButton btnSearch;
@@ -17,7 +15,8 @@ public class SearchTab {
     private JTable table1;
 
     private ButtonGroup group;
-    public SearchTab() {
+    public SearchTab(Account account) {
+        connectManage = account;
         initComponents();
     }
 
@@ -91,19 +90,9 @@ public class SearchTab {
             }
 
         } catch (SQLException ex) {
-            DatabaseConnectManage.class.getName();
+            Account.class.getName();
             txtResult.setText("Error executing query: " + ex.getMessage());
         }
-    }
-
-    private boolean isQuerySafe(String query) {
-        // Basic query safety check
-        String upperQuery = query.toUpperCase().trim();
-        return upperQuery.startsWith("SELECT") &&
-                !upperQuery.contains("DROP") &&
-                !upperQuery.contains("DELETE") &&
-                !upperQuery.contains("INSERT") &&
-                !upperQuery.contains("UPDATE");
     }
 
 

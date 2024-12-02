@@ -15,12 +15,12 @@ public class Loading extends JFrame {
 
 
     private void initComponents() {
-
+        setTitle("Varied Insurance Management System");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(838, 511));
-        setUndecorated(true);
+
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -34,8 +34,6 @@ public class Loading extends JFrame {
         title.setText("INSURANCE MANAGEMENT SYSTEM");
         loading.add(title);
         title.setBounds(0, 290, 840, 40);
-
-
 
         load.setFont(new java.awt.Font("Cambria", 0, 10)); // NOI18N
         load.setForeground(new java.awt.Color(255, 255, 255));

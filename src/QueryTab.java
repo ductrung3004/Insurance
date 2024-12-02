@@ -8,9 +8,10 @@ public class QueryTab {
     private JTextField txtQuery;
     private JButton btnRun;
     private JTextArea txtResult;
-    DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    private Account connectManage ;
 
-    public QueryTab() {
+    public QueryTab(Account account) {
+        connectManage = account;
         initComponents();
     }
 
@@ -64,7 +65,7 @@ public class QueryTab {
             String results = loadDatabaseQuery(queryText);
             txtResult.setText(results);
         } catch (SQLException ex) {
-            DatabaseConnectManage.class.getName();
+            Account.class.getName();
             txtResult.setText("Error executing query: " + ex.getMessage());
         }
     }

@@ -6,12 +6,8 @@ import java.util.Vector;
 
 public class ClaimsTab extends Component {
 
-    private final DatabaseConnectManage connectManage;
-    public ClaimsTab() {
-        connectManage = new DatabaseConnectManage();
-    }
 
-    JPanel createClaimsPanel() {
+    JPanel createClaimsPanel(Account connectManage) {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Create table model and populate with claims data

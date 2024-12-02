@@ -1,40 +1,48 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 
 public class AppPanel extends JFrame {
-    private JTabbedPane tabbedPane;
-    private PoliciesTab policiesPanel;
-    private CustomerTab customersPanel;
-    private ClaimsTab claimsPanel;
-    private AgentTab agentPanel;
-    private QueryTab queryPanel;
-    private SearchTab searchPanel;
 
-public AppPanel(){
-    setTitle("Varied Insurance Management System");
-    setSize(800, 600);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    centerFrameOnScreen();
+    private JPanel AppPanel;
+    private JButton profileButton;
+    private JButton logoutButton;
+    private JButton manageButton;
+    private JButton optionButton;
+    private Manage manage;
 
-
-    tabbedPane = new JTabbedPane();
-    policiesPanel = new PoliciesTab();
-    customersPanel = new CustomerTab();
-    claimsPanel = new ClaimsTab();
-    agentPanel = new AgentTab();
-    queryPanel = new QueryTab();
-    searchPanel = new SearchTab();
-
-    tabbedPane.addTab("Customer", customersPanel.createCustomersPanel());
-    tabbedPane.addTab("Policy", policiesPanel.createPoliciesPanel());
-    tabbedPane.addTab("Claim", claimsPanel.createClaimsPanel());
-    tabbedPane.addTab("Agent", agentPanel.createAgentTab());
-    tabbedPane.addTab("Query",queryPanel.createQueryTab());
-    tabbedPane.addTab("Search",searchPanel.createSearchTab());
-    add(tabbedPane);
+    public void setManage(Account account){
+        manage = new Manage(account);
     }
 
+    public AppPanel(final Account account) {
+        setResizable(false);
+        setTitle("Varied Insurance Management System");
+        setSize(838, 511);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(AppPanel);
+        centerFrameOnScreen();
+
+        manageButton.addActionListener(e -> executeManage(account));
+
+
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AppPanel.setVisible(false);
+                setVisible(false);
+                Main.main(new String[0]);
+            }
+        });
+    }
+    private void executeManage(final Account account){
+        setManage(account);
+        manage.setVisible(true);
+    }
 
     private void centerFrameOnScreen() {
         // Get the screen size
@@ -47,6 +55,4 @@ public AppPanel(){
         // Set the location
         setLocation(centerX, centerY);
     }
-
-
 }

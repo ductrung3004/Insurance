@@ -7,7 +7,7 @@ import java.util.Vector;
 public class AgentTab {
 
 
-    JPanel createAgentTab() {
+    JPanel createAgentTab(Account acount) {
         JPanel panel = new JPanel(new BorderLayout());
 
         //Columns
@@ -20,7 +20,7 @@ public class AgentTab {
             }
         };
 
-        loadAgentToTable(model);
+        loadAgentToTable(model,acount);
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -29,8 +29,7 @@ public class AgentTab {
     }
 
 
-    void loadAgentToTable(DefaultTableModel model){
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    void loadAgentToTable(DefaultTableModel model, Account connectManage){
 
         try (Connection conn = DriverManager.getConnection(connectManage.getUrl(), connectManage.getUsername(), connectManage.getPassword());
              Statement stmt = conn.createStatement();

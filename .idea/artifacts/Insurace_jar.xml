@@ -2,7 +2,7 @@
   <artifact type="jar" name="Insurace:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Insurace_jar</output-path>
     <root id="archive" name="Insurace.jar">
-      <element id="module-output" name="Insurace" />
+      <element id="module-output" name="Insurance" />
     </root>
   </artifact>
 </component>

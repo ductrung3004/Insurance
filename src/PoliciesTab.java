@@ -7,8 +7,7 @@ import java.util.Vector;
 public class PoliciesTab {
 
 
-    JPanel createPoliciesPanel() {
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    JPanel createPoliciesPanel(Account connectManage) {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Define column names for the table

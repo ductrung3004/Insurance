@@ -7,8 +7,7 @@ public class addCustomerFunction {
 
 
 
-    void addCustomer(DefaultTableModel model) {
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    void addCustomer(DefaultTableModel model, Account connectManage) {
 
         JTextField nameField = new JTextField(20);
         JTextField companyField = new JTextField(20);
@@ -78,7 +77,7 @@ public class addCustomerFunction {
                     pstmt.executeUpdate();
 
                     CustomerTab customerTab = new CustomerTab();
-                    customerTab.loadCustomersToTable(model);
+                    customerTab.loadCustomersToTable(model, connectManage);
 
 
                     JOptionPane.showMessageDialog(null, "Customer Added Successfully");

@@ -1,17 +1,12 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class updateCustomerFunction {
 
 
-    void updateCustomer(JTable table, DefaultTableModel model) {
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    void updateCustomer(JTable table, DefaultTableModel model, Account connectManage) {
         int selectedRow = table.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(table, "Please select a customer to update");
@@ -61,7 +56,7 @@ public class updateCustomerFunction {
                     pstmt.executeUpdate();
 
                     CustomerTab customerTab = new CustomerTab();
-                    customerTab.loadCustomersToTable(model);
+                    customerTab.loadCustomersToTable(model,connectManage);
 
                     JOptionPane.showMessageDialog(table, "Customer Updated Successfully");
                 }

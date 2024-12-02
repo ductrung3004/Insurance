@@ -3,8 +3,8 @@ public class Main {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
-            AppPanel app = new AppPanel();
-            app.setVisible(true);
+            Login login = new Login();
+            login.setVisible(true);
         });
     }
 }

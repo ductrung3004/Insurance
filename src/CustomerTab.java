@@ -7,7 +7,7 @@ import java.util.Vector;
 public class CustomerTab {
 
 
-    JPanel createCustomersPanel() {
+    JPanel createCustomersPanel(final Account account) {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Table Model
@@ -20,7 +20,7 @@ public class CustomerTab {
         };
 
         // Load Customers
-        loadCustomersToTable(model);
+        loadCustomersToTable(model, account);
 
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -35,9 +35,9 @@ public class CustomerTab {
         addCustomerFunction addCustomer = new addCustomerFunction();
         deleteCustomerFunction deleteCustomer = new deleteCustomerFunction();
         updateCustomerFunction updateCustomer = new updateCustomerFunction();
-        addButton.addActionListener(e -> addCustomer.addCustomer(model));
-        updateButton.addActionListener(e -> updateCustomer.updateCustomer(table, model));
-        deleteButton.addActionListener(e -> deleteCustomer.deleteCustomer(table, model));
+        addButton.addActionListener(e -> addCustomer.addCustomer(model, account));
+        updateButton.addActionListener(e -> updateCustomer.updateCustomer(table, model, account));
+        deleteButton.addActionListener(e -> deleteCustomer.deleteCustomer(table, model, account));
 
         buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
@@ -47,9 +47,8 @@ public class CustomerTab {
         return panel;
     }
 
-    void loadCustomersToTable(DefaultTableModel model) {
+    void loadCustomersToTable(DefaultTableModel model, Account connectManage) {
         JTable table = new JTable(model);
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
         model.setRowCount(0); // Clear existing rows
         try (Connection conn = DriverManager.getConnection(connectManage.getUrl(), connectManage.getUsername(), connectManage.getPassword());
              Statement stmt = conn.createStatement();

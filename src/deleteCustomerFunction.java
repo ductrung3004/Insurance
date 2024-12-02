@@ -5,8 +5,7 @@ import java.sql.*;
 public class deleteCustomerFunction {
 
 
-    void deleteCustomer(JTable table, DefaultTableModel model) {
-        DatabaseConnectManage connectManage = new DatabaseConnectManage();
+    void deleteCustomer(JTable table, DefaultTableModel model, Account connectManage) {
         int selectedRow = table.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(table, "Please select a customer to delete");
@@ -40,7 +39,7 @@ public class deleteCustomerFunction {
                     pstmtCustomer.executeUpdate();
 
                     CustomerTab customerTab = new CustomerTab();
-                    customerTab.loadCustomersToTable(model);
+                    customerTab.loadCustomersToTable(model, connectManage);
 
 
                     JOptionPane.showMessageDialog(table, "Customer Deleted Successfully");

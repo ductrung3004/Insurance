@@ -6,8 +6,6 @@ public class Load {
         Load.setVisible(true);
         try{
 
-
-
             for(int i=0;i<=100;i++) {
                 Thread.sleep(20);
                 Load.load.setText(Integer.toString(i) + "%");
